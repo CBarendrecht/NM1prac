@@ -41,6 +41,6 @@ for i = 1:length(t)-1
     title('Verandering van rho als functie van dx in de tijd');
     axis([0 3 1/4 1]);
     
-    pause(0.01); 
+    pause(0.001); 
 end
 hold off;
