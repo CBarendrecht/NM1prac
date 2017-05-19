@@ -39,6 +39,6 @@ for i=1:length(t)-1
     plot(dx:dx:L,0.5-0.5*w);
     title('Verandering van rho als functie van dx in de tijd');
     
-    pause(0.01); 
+    pause(0.001); 
 end
 hold off;
