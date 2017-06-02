@@ -38,15 +38,15 @@ for i = 1:length(t)-1
     cla;
     w = w + dt*(v*K*w - f3(w,dx) + r6(w,v,dx));
     
-    subplot(2,1,2);
-    plot(dx:dx:L,w);
-    title('Verandering van u als functie van dx in de tijd');
-    axis([0 3 -2 1]);
+    %subplot(2,1,2);
+    %plot(dx:dx:L,w);
+    %title('Verandering van u als functie van dx in de tijd');
+    %axis([0 3 -2 1]);
     
-    subplot(2,1,1);
+    %subplot(2,1,1);
     plot(dx:dx:L,0.5-0.5*w);
     title('Verandering van rho als functie van dx in de tijd');
-    axis([0 3 -0.1 1]);
+    axis([0 3 -0.1 0.75]);
     
     pause(0.001); 
 end
