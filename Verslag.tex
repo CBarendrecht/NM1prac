@@ -1,51 +1,83 @@
-% verslag mod2B
 \documentclass{article}
-%table of contents
-\usepackage[utf8]{inputenc}
-\usepackage{url} %nodig om underscores toe te staan in url
-
-%meer ams meer beter
-
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm} %nodig voor blokje
-\usepackage{bbm} %indicator
+\usepackage[a4paper]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath, amssymb}
+\usepackage{ wasysym }
 \usepackage{color}
-
-\usepackage{marginnote}
-\usepackage[margin=1in,footskip=0.25in]{geometry} %heb wat meer ruimte
-
-%Plaatjes
 \usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[dutch,english]{babel}
+\usepackage {bm}
+\usepackage{wasysym}
+\usepackage{listings}
 \usepackage{float}
-\usepackage{caption}
-\usepackage{subcaption}
 \usepackage{epstopdf}
-\usepackage{import} % handig bij importeren van dingen uit andere mapjes
-\usepackage{wallpaper} %voorblad
-\usepackage{wrapfig} %plaatjes in tekst
 
-\newcommand*{\blankpage}{%
-\vspace*{\fill}
-{\centering This page is left intentionally blank.\par}
-\vspace{\fill}}
-\newcommand{\orde}[1]{\mathcal{O}(#1)}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
+%\newcommand{\f}{\(f\)}
+%\newcommand{\g}{\(g\)}
 \newcommand{\Q}{\mathbb{Q}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\ceiling}[1]{\lceil #1 \rceil}
-\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+%\newcommand{\Z}{\mathbb{Z}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\C}{\mathbb{C}}
+%\newcommand{\N}{\mathbb{N}}
+\newcommand{\QED}{\hfill\ensuremath{\square}}
+\newcommand{\rk}{\text{rk}~}
+\newcommand{\Dt}{\Delta t}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+\title{Numerieke Methoden 1 Practicum Traffic Flow}
+
+\author{Casper Barendrecht \& Stijn Moerman\\ s1693441 \& s1696874}
+
+\date{\today}
 
 
 \begin{document}
-hi
+\maketitle
 
 
+
+\textbf{Opgave 1}\\
+Laat \(u(x,t)=\alpha\rho + \beta\).
+
+Er geldt:
+\begin{align}
+	\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}(\rho(1-\rho))=\nu \frac{\partial^2 \rho}{\partial x^2},~\nu\in \mathbb{R}_+ \\
+ \frac{\partial u}{\partial t}+\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) = \nu \frac{\partial^2 u}{\partial x^2},~\nu\in \mathbb{R}_+
+\end{align}
+derp
+\begin{align*}
+ \frac{\partial u}{\partial t} &=\alpha\frac{\partial \rho}{\partial t}\\
+\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)&=\frac{1}{2}\frac{\partial}{\partial x}(\alpha^2\rho^2 +2\alpha\beta\rho+\beta^2)= \frac{1}{2}(\alpha^2+2\alpha\beta)\frac{\partial \rho}{\partial x}\\
+\nu \frac{\partial^2 u}{\partial x^2}&=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}
+\end{align*}
+En dus:
+\begin{align*}
+	\alpha\frac{\partial \rho}{\partial t}+\frac{1}{2}(\alpha^2+2\alpha\beta)\frac{\partial \rho}{\partial x}=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}
+\end{align*}
+%We vinden \(\alpha=1\).
 
 \end{document}
-%http://arborjs.org/docs/barnes-hut
-%https://en.wikipedia.org/wiki/Protoplanetary_disk
-%Planet Formation: Theory,Observations and Experiments, {Brandner,Klahr,Jakosky},2006,Cambridge University Press
-%http://www.annualreviews.org.tudelft.idm.oclc.org/doi/10.1146/annurev-astro-081710-102521
