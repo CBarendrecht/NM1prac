@@ -57,17 +57,20 @@
 \begin{document}
 \maketitle
 
-
+In dit verslag, 
 
 \textbf{Opgave 1}\\
-Laat \(u(x,t)=\alpha\rho + \beta\).
+
 
 Er geldt:
 \begin{align}
-	\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}(\rho(1-\rho))=\nu \frac{\partial^2 \rho}{\partial x^2},~\nu\in \mathbb{R}_+ \label{eq:rho}\\
+	\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}(\rho(1-\rho))=\nu \frac{\partial^2 \rho}{\partial x^2},~\nu\in \mathbb{R}_+ \label{eq:rho}
+	\end{align}
+Laten we \(u(x,t)=\alpha\rho + \beta\), dan kan vergelijking \eqref{eq:rho} herschreven worden tot:
+	\begin{align}
  \frac{\partial u}{\partial t}+\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) = \nu \frac{\partial^2 u}{\partial x^2},~\nu\in \mathbb{R}_+\label{eq:u}
 \end{align}
-derp
+We schrijven de afgeleides van \(u(x,t)\) in termen van \(p(x,t\) als volgt:
 \begin{align*}
  \frac{\partial u}{\partial t} &=\alpha\frac{\partial \rho}{\partial t}\\
 \frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)&=\frac{1}{2}\frac{\partial}{\partial x}(\alpha^2\rho^2 +2\alpha\beta\rho+\beta^2)= \frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))\\
@@ -78,7 +81,8 @@ En dus:
 	\alpha\frac{\partial \rho}{\partial t}+\frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}\\
 		\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}\rho(\beta-(-\frac{\alpha}{2})\rho)=\nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
-We vinden dat verglijking \eqref{eq:rho} en \eqref{eq:u} hetzelfde zijn als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=-2\rho+\beta\).\\
+We vinden dus dat vergelijking   \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)+\).\\
+
 
 
 
@@ -153,9 +157,8 @@ en
 \textbf{Opgave 3}
 Mooie tabel is mooi:
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
-
 \label{tab:specs}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -167,18 +170,19 @@ Mooie tabel is mooi:
 \textbf{Opgave 6}
 Laat nu: 
 \begin{align*}
-	u^0(x) =\begin{cases}
+	u(x,0) =\begin{cases}
 	1, & 0\leq x \leq L/3,\\
 	2-(3/L)x, & L/3 \leq x\leq 2L/3,\\
 	0, & 2L/3 \leq x
 	\end{cases}
 \end{align*}
 samen met de nieuwe randvoorwaarden 
-\[u_l(t)=1,~u_r(t)=0,~t\geq 0\]
+\begin{align*}
+u(0,t)=1,&&\frac{\partial u}{\partial x}(L,t)=0,&&\mbox{voor }t\geq 0
+\end{align*}
 en de nieuwe parameters:
-\begin{table}[h!]
+\begin{table}[H]
 \centering
-
 \label{tab:specs2}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
