@@ -80,43 +80,7 @@ En dus:
 \end{align*}
 We vinden dat verglijking \eqref{eq:rho} en \eqref{eq:u} hetzelfde zijn als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=-2\rho+\beta\).\\
 
-\textbf{Opgave 3}
-Mooie tabel is mooi:
 
-\begin{table}[h!]
-\centering
-
-\label{tab:specs}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\(v\) & \(N\) & \(L\) & \(t_e\) & \(\Dt\) \\ \hline
- 0.5 & 100 & 3.0 & 5.0 & 0.0001 \\ \hline
-\end{tabular}
-\caption{Startvoorwaarden}
-\end{table}
-\textbf{Opgave 6}
-Laat nu: 
-\begin{align*}
-	u^0(x) =\begin{cases}
-	1, & 0\leq x \leq L/3,\\
-	2-(3/L)x, & L/3 \leq x\leq 2L/3,\\
-	0, & 2L/3 \leq x
-	\end{cases}
-\end{align*}
-samen met de nieuwe randvoorwaarden 
-\[u_l(t)=1,~u_r(t)=0,~t\geq 0\]
-en de nieuwe parameters:
-\begin{table}[h!]
-\centering
-
-\label{tab:specs2}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\(v\) & \(N\) & \(L\) & \(t_e\) & \(\Dt\) \\ \hline
- 0.01 & 100 & 3.0 & 5.0 & 0.003 \\ \hline
-\end{tabular}
-\caption{Startvoorwaarden}
-\end{table}
 
 
 
@@ -186,6 +150,43 @@ en
 \cdot\frac{1}{4\Delta x}
 \end{align*}
 
+\textbf{Opgave 3}
+Mooie tabel is mooi:
+
+\begin{table}[h!]
+\centering
+
+\label{tab:specs}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\(v\) & \(N\) & \(L\) & \(t_e\) & \(\Dt\) \\ \hline
+ 0.5 & 100 & 3.0 & 5.0 & 0.0001 \\ \hline
+\end{tabular}
+\caption{Startvoorwaarden}
+\end{table}
+\textbf{Opgave 6}
+Laat nu: 
+\begin{align*}
+	u^0(x) =\begin{cases}
+	1, & 0\leq x \leq L/3,\\
+	2-(3/L)x, & L/3 \leq x\leq 2L/3,\\
+	0, & 2L/3 \leq x
+	\end{cases}
+\end{align*}
+samen met de nieuwe randvoorwaarden 
+\[u_l(t)=1,~u_r(t)=0,~t\geq 0\]
+en de nieuwe parameters:
+\begin{table}[h!]
+\centering
+
+\label{tab:specs2}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\(v\) & \(N\) & \(L\) & \(t_e\) & \(\Dt\) \\ \hline
+ 0.01 & 100 & 3.0 & 5.0 & 0.003 \\ \hline
+\end{tabular}
+\caption{Startvoorwaarden}
+\end{table}
 
 
 \end{document}
