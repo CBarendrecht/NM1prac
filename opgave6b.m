@@ -26,8 +26,8 @@ for i = 2:N
 end
 K(1,1) = -2;
 K(1,2) = 1;
-K(N+1,N) = -1;
-K(N+1,N+1) = 2;
+K(N+1,N) = 1;
+K(N+1,N+1) = -2;
 K = K/dx^2;
 
 
@@ -37,6 +37,7 @@ hold on;
 for i = 1:length(t)-1
     cla;
     w = w + dt*(v*K*w - f6b(w,dx) + r6b(w,v,dx));
+    p=0.5-0.5*w; %dichteid
     
     subplot(2,1,2);
     plot(dx:dx:L,w);
@@ -44,10 +45,16 @@ for i = 1:length(t)-1
     axis([0 3 -2 1]);
     
     subplot(2,1,1);
-    plot(dx:dx:L,0.5-0.5*w);
+    plot(dx:dx:L,p);
     title('Verandering van rho als functie van dx in de tijd');
     axis([0 3 -0.1 1]);
     
-    pause(0.001); 
+    pause(0.001);     
+    Autos = (dx/2)*(p(1)+p(length(p)) +2*sum(p(2:length(p)-1)));
+    disp(num2str(Autos));
+    if Autos < 0.001
+        disp(['De weg is leeg op t = ' num2str(t(i))]);
+        break;
+    end
 end
 hold off;
