@@ -202,6 +202,17 @@ en de nieuwe parameters:
 \caption{Startvoorwaarden}
 \end{table}
 
+We hebben nu: $u(0,t) = 1$, dus krijgen we:
+\begin{align*}
+-\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{-u_{0}+2u_1-u_{2}}{\Delta x^2}
+= \frac{-1+2u_1-u_{2}}{\Delta x^2}
+= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{-1}{\Delta x^2}\\
+\end{align*}
+
+Voor het opgewonden schema hebben we:
+$\dot{u}_{i} =\frac{-u_{i-}+u_{i}}{\Delta x}$
+etc. 
+
 
 \end{document}
 %plaatje opgave 5 is op t=0.3600
