@@ -84,13 +84,6 @@ En dus:
 We vinden dus dat vergelijking   \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)+\).\\
 
 
-
-
-
-
-
-
-
 \textbf{Opgave 2:}
 We hebben:
 \begin{align*}
@@ -149,9 +142,26 @@ en
 \begin{align*}
 \vec{f}(\vec{u}) = 
 \begin{pmatrix}
-1
+u_2^2\\
+-u_1^2 + u_3^2\\
+\vdots\\
+-u_{i-1}^2+u_{i+1}^2\\
+\vdots\\
+-u_{N-1}^2+u_{N+1}^2\\
+-u_N^2\\
 \end{pmatrix}
 \cdot\frac{1}{4\Delta x}
+\end{align*}
+en
+\begin{align*}
+\vec{r}(\vec{u}) = 
+\begin{pmatrix}
+\frac{-\nu}{\Delta x^2} + \frac{1}{4\Delta x}\\
+0\\
+\vdots\\
+0\\
+\frac{\nu u_N}{\Delta x} + \frac{-u_N^2}{4\Delta x}\\
+\end{pmatrix}
 \end{align*}
 
 \textbf{Opgave 3}
