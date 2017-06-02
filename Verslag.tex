@@ -2,7 +2,6 @@
 \usepackage[a4paper]{geometry}
 \usepackage{parskip}
 \usepackage{amsmath, amssymb}
-\usepackage{ wasysym }
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{enumerate}
@@ -79,5 +78,74 @@ En dus:
 	\alpha\frac{\partial \rho}{\partial t}+\frac{1}{2}(\alpha^2+2\alpha\beta)\frac{\partial \rho}{\partial x}=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
 %We vinden \(\alpha=1\).
+
+
+
+
+
+\textbf{Opgave 2:}
+We hebben:
+\begin{align*}
+\frac{\partial u}{\partial t} &= \nu \frac{\partial^2 u}{\partial x^2} -\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) &\text{ voor } 0<x<L, t>0\\
+u(0,t) &= -1 &\text{ voor } t\geq 0\\
+\frac{\partial u}{\partial x}(L,t) &= 0 &\text{ voor } t\geq 0\\
+u(x,0) &= 0 &\text{ voor } 0<x<L
+\end{align*}
+En we doen de discretisatie z.d.d. $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
+In het vervolg geldt $u_i=u(x_i)$.
+We schrijven de eerste formule in de vorm voor $\vec{u} = (u_1,\dots,u_{N+1})^\intercal$:
+\begin{align*}
+\dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
+\end{align*}
+Voor $1\leq i\leq N+1$ geldt:
+\begin{align*}
+-\frac{\partial^2 u}{\partial x^2}(x_i) &= \frac{-u_{i-1}+2u_i-u_{i+1}}{\Delta x^2}\\
+\left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_i) &= \frac{-\frac{1}{2}u_{i-1}^2+\frac{1}{2}u_{i+1}^2}{2\Delta x}
+= \frac{-u_{i-1}^2+u_{i+1}^2}{4\Delta x}
+\end{align*}
+Ook hebben we:
+\begin{align*}
+-\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{-u_{0}+2u_1-u_{2}}{\Delta x^2}
+= \frac{1+2u_1-u_{2}}{\Delta x^2}
+= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{1}{\Delta x^2}\\
+\left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_1) &= \frac{-u_{0}^2+u_{2}^2}{4\Delta x}
+= \frac{-1+u_{2}^2}{4\Delta x}
+= \frac{u_{2}^2}{4\Delta x}+\frac{-1}{4\Delta x}
+\end{align*}
+Voor $u_{N+1}$ kunnen we onze beginvoorwaarde verwerken d.m.v. het virtuele punt $x_{N+2}$.
+We krijgen dan:
+\begin{align*}
+0=\dot{u}_{N+1} = \frac{-u_{N}+u_{N+2}}{2\Delta x}
+\end{align*}
+Dus $u_{N+2}=u_N$.
+We hebben dan dus:
+\begin{align*}
+-\frac{\partial^2 u}{\partial x^2}(x_{N+1}) &= \frac{-u_{N}+2u_{N+1}-u_{N+2}}{\Delta x^2}
+= \frac{-u_{N}+2u_{N+1}}{\Delta x^2} +\frac{-u_{N}}{\Delta x^2}\\
+\left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_{N+1}) &= \frac{-u_{N}^2+u_{N+2}^2}{4\Delta x}
+= \frac{-u_{N}^2}{4\Delta x} +\frac{u_{N}^2}{4\Delta x}
+\end{align*}
+
+Dus we krijgen dan:
+\begin{align*}
+K = -\begin{pmatrix}
+2 & -1 & 0 & \hdots & 0 & 0\\
+-1 & 2 & -1 & \hdots & 0 & 0\\
+0 & -1 & 2 & \hdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & 0 & \hdots & 2 & -1\\
+0 & 0 & 0 & \hdots & -1 & 2\\
+\end{pmatrix}\cdot\frac{1}{\Delta x^2}
+\end{align*}
+en
+\begin{align*}
+\vec{f}(\vec{u}) = 
+\begin{pmatrix}
+1
+\end{pmatrix}
+\cdot\frac{1}{4\Delta x}
+\end{align*}
+
+
 
 \end{document}
