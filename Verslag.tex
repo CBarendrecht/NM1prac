@@ -98,7 +98,7 @@ We schrijven de eerste formule in de vorm voor $\vec{u} = (u_1,\dots,u_{N+1})^\i
 \begin{align*}
 \dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
 \end{align*}
-Voor $1\leq i\leq N+1$ geldt:
+Voor $2\leq i\leq N$ geldt:
 \begin{align*}
 -\frac{\partial^2 u}{\partial x^2}(x_i) &= \frac{-u_{i-1}+2u_i-u_{i+1}}{\Delta x^2}\\
 \left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_i) &= \frac{-\frac{1}{2}u_{i-1}^2+\frac{1}{2}u_{i+1}^2}{2\Delta x}
@@ -151,12 +151,10 @@ u_2^2\\
 -u_N^2\\
 \end{pmatrix}
 \cdot\frac{1}{4\Delta x}
-\end{align*}
-en
-\begin{align*}
+&&
 \vec{r}(\vec{u}) = 
 \begin{pmatrix}
-\frac{-\nu}{\Delta x^2} + \frac{1}{4\Delta x}\\
+\frac{-\nu}{\Delta x^2} + \frac{1}{4\Delta x^2}\\
 0\\
 \vdots\\
 0\\
@@ -177,6 +175,63 @@ Mooie tabel is mooi:
 \end{tabular}
 \caption{Startvoorwaarden}
 \end{table}
+
+\textbf{Opgave 4}
+Om te kijken hoe groot we $\Dt$ kunnen kiezen, schrijven we voor alle $i$:
+\begin{align*}
+\dot{u}_i =g_i(\vec{u})
+\end{align*}
+We hebben dan dus (met $2\leq i \leq N$):
+\begin{align*}
+g_1(\vec{u})&=\dot{u}_1 = \nu \frac{-2u_1+u_2}{\Delta x^2} -\frac{u_2^2}{4\Delta x} -\frac{\nu}{\Delta x^2} +\frac{1}{4\Delta x}\\
+g_i(\vec{u})&=\dot{u}_i = \nu \frac{u_{i-1}-2u_i+u_{i+1}}{\Delta x^2} -\frac{-u_{i-1}^2+u_{i+1}^2}{4\Delta x}\\
+g_{N+1}(\vec{u})&=\dot{u}_{N+1} = \nu \frac{u_{N}-2u_{N+1}}{\Delta x^2} -\frac{-u_N^2}{4\Delta x} +\frac{\nu u_N}{\Delta x^2} -\frac{u_N^2}{4\Delta x}
+=2\nu \frac{u_N}{\Delta x^2} -2\nu\frac{u_{N+1}}{\Delta x^2}
+\end{align*}
+Voor de stabiliteit willen we nu kijken hoe groot de eigenwaarden van de Jacobi-matrix $J$ van $\vec{g}(\vec{u})$ kunnen zijn.
+We vinden (voor $2\leq i\leq N$):
+\begin{align*}
+J_{1,1} &= \frac{\partial g_1}{\partial u_1} = \frac{-2\nu}{\Delta x^2}\\
+J_{1,2} &= \frac{\partial g_1}{\partial u_2} = \frac{\nu}{\Delta x^2} -\frac{u_2}{2\Delta x}\\
+J_{i,i-1} &= \frac{\partial g_i}{\partial u_{i-1}} = \frac{\nu}{\Delta x^2}+\frac{u_{i-1}}{2\Delta x}\\
+J_{i,i} &= \frac{\partial g_i}{\partial u_i} = \frac{-2\nu}{\Delta x^2}\\
+J_{i,i+1} &= \frac{\partial g_i}{\partial u_{i+1}} = \frac{\nu}{\Delta x^2} -\frac{u_{i+1}}{2\Delta x}\\
+J_{N+1,N} &= \frac{\partial g_{N+1}}{\partial u_N} =  \frac{2\nu}{\Delta x^2}\\
+J_{N+1,N+1} &= \frac{\partial g_{N+1}}{\partial u_{N+1}} = \frac{-2\nu}{\Delta x^2}
+\end{align*}
+Door in deze Jacobi-matrix de beginvoorwaarde $u(x,0) =0$ in te vullen krijgen we:
+\begin{align*}
+J(\vec{u}(\vec{x},0)) = \frac{\nu}{\Delta x^2}
+\begin{pmatrix}
+-2 & 1 & &&\\
+1 &\ddots &\ddots&&\\
+&\ddots &\ddots&1&\\
+& &1&-2&1\\
+& &&2&-2\\
+\end{pmatrix}
+\end{align*}
+M.b.v. de methode van Gerschgorin kijken we waar de eigenwaarden van deze matrix moeten liggen.
+Deze methode zegt dat elke eigenwaarde $\lambda$ aan minstens een van de volgende eisen moet voldoen:
+\begin{align*}
+\left|\lambda + \frac{2\nu}{\Delta x^2}\right| \leq \frac{\nu}{\Delta x^2}\\
+\left|\lambda + \frac{2\nu}{\Delta x^2}\right| \leq \frac{2\nu}{\Delta x^2}\\
+\left|\lambda + \frac{2\nu}{\Delta x^2}\right| \leq \frac{2\nu}{\Delta x^2}
+\end{align*}
+Dus er geldt:
+\begin{align*}
+\left|\frac{\Delta x^2}{2\nu} \cdot\lambda +1\right|\leq 1
+\end{align*}
+
+Voor de stabiliteit van Euler voorwaarts moet elke eigenwaarde $\lambda$ voldoen aan:
+\begin{align*}
+\left|\Delta t \cdot\lambda +1\right|\leq 1
+\end{align*}
+Kortom, voor stabiliteit moet er gelden: $\Delta t \leq \frac{\Delta x^2}{2\nu} =\frac{L^2}{2\nu(N+1)^2}$.
+Met de gekozen waarden uit opgave $3$ vinden we een maximale tijdstap van:
+\begin{align*}
+\Delta t \leq \frac{3^2}{2\cdot 0.5 \cdot(100 +1)^2} = \frac{9}{10201}
+\end{align*}
+
 \textbf{Opgave 6}
 Laat nu: 
 \begin{align*}
@@ -209,10 +264,42 @@ We hebben nu: $u(0,t) = 1$, dus krijgen we:
 = \frac{2u_1-u_{2}}{\Delta x^2} +\frac{-1}{\Delta x^2}\\
 \end{align*}
 
-Voor het opgewonden schema hebben we:
-$\dot{u}_{i} =\frac{-u_{i-}+u_{i}}{\Delta x}$
-etc. 
-
+Voor het opgewonden schema hebben we:\begin{align*}
+\dot{u}_{i} =\frac{-u_{i-1}+u_{i}}{\Delta x}
+\end{align*}
+Dus hebben we voor $2\leq i \leq N+1$:
+\begin{align*}
+\left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_i) &= \frac{-\frac{1}{2}u_{i-1}^2+\frac{1}{2}u_{i}^2}{2\Delta x}
+= \frac{-u_{i-1}^2+u_{i}^2}{4\Delta x}
+\end{align*}
+en verder ook:
+\begin{align*}
+\left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_1) &= \frac{-\frac{1}{2}u_{0}^2+\frac{1}{2}u_{1}^2}{2\Delta x}
+= \frac{-u_{0}^2+u_{1}^2}{4\Delta x}
+=\frac{u_1^2}{4\Delta x} + \frac{-1}{4\Delta x}
+\end{align*}
+We krijgen dus een nieuwe $\vec{f}$ en $\vec{r}$:
+\begin{align*}
+\vec{f}(\vec{u}) = 
+\begin{pmatrix}
+u_1^2\\
+-u_1^2 + u_2^2\\
+\vdots\\
+-u_{i-1}^2+u_{i}^2\\
+\vdots\\
+-u_{N-1}^2+u_{N}^2\\
+-u_N^2+u_{N+1}^2\\
+\end{pmatrix}
+\cdot\frac{1}{4\Delta x} &&
+\vec{r}(\vec{u}) = 
+\begin{pmatrix}
+\frac{\nu}{\Delta x^2} + \frac{1}{4\Delta x}\\
+0\\
+\vdots\\
+0\\
+\frac{\nu u_N}{\Delta x^2}\\
+\end{pmatrix}
+\end{align*}
 
 \end{document}
 %plaatje opgave 5 is op t=0.3600
