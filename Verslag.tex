@@ -215,12 +215,7 @@ u_2^2\\
 \end{pmatrix}
 \end{align*}
 
-Vervolgens gaan we m.b.v. onze benadering 
-\begin{align*}
-\dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
-\end{align*}
-het probleem simuleren met de begin- en randvoorwaarden zoals boven gegeven.
-Hiervoor gebruiken we verder de volgende waarden:
+Nu het het probleem gediscretiseerd is, kan dit simpele model gesimuleerd worden. Hiertoe moeten eerst enkele beginvoorwaarden gekozen worden. Vooralsnog kiezen we:
 \begin{table}[H]
 \centering
 \label{tab:specs}
@@ -231,6 +226,7 @@ Hiervoor gebruiken we verder de volgende waarden:
 \end{tabular}
 \caption{Startvoorwaarden}
 \end{table}
+Merk op dat we hiermee \(u(x,t)=1-2\rho(x,t)\) simuleren. Om de waarde voor \(\rho\)  te vinden, schalen we \(u\) weer terug: \(\rho =\frac{1}{2}u(x,t)-\frac{1}{2}\).
 \newpage
 Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een aantal momentopnames genomen:
 
@@ -323,8 +319,11 @@ Als we de simulatie lang laten doorlopen blaast de simulatie met de te grote $\D
 \caption{Vergelijking tussen de maximale stabiele waarde voor $\Dt$ en een $1\%$ grotere tijdstap bij $t=0.360$}
 \end{figure}
 
-\section*{Andere voorwaarden}
-Laat nu: 
+\section*{Andere begin- en randvoorwaarden}
+Het eerste probleem, simuleerde het begin van een file (Een hele hoge dichtheid in het begin die zich langzaam steeds verder verspreid over de weg). 
+Een volgende stap is om het einde van een file te simuleren. 
+Dit is eenvoudig te implementeren door de begin- en randvoorwaarden te veranderen.
+Laat namelijk:
 \begin{align*}
 	u(x,0) =\begin{cases}
 	1, & 0\leq x \leq L/3,\\
@@ -336,7 +335,8 @@ samen met de nieuwe randvoorwaarden
 \begin{align*}
 u(0,t)=1,&&\frac{\partial u}{\partial x}(L,t)=0,&&\mbox{voor }t\geq 0
 \end{align*}
-en de nieuwe parameters:
+Dit geeft een lineaire dichtheid op de snelweg weer (aan het begin van de file kunnen de autos weer rijden, echter autos in de staart van de file staan nog steeds stil).
+We veranderen ook enkele parameters:
 \begin{table}[H]
 \centering
 \label{tab:specs2}
@@ -345,7 +345,7 @@ en de nieuwe parameters:
 \(v\) & \(N\) & \(L\) & \(t_e\) & \(\Dt\) \\ \hline
  0.01 & 100 & 3.0 & 5.0 & 0.003 \\ \hline
 \end{tabular}
-\caption{Startvoorwaarden}
+\caption{De nieuwe startvoorwaarden}
 \end{table}
 
 We hebben nu: $u(0,t) = 1$, dus krijgen we:
@@ -354,9 +354,9 @@ We hebben nu: $u(0,t) = 1$, dus krijgen we:
 = \frac{1-2u_1+u_{2}}{\Delta x^2}
 = \frac{-2u_1+u_{2}}{\Delta x^2} +\frac{1}{\Delta x^2}
 \end{align*}
-
-Als we voor onze nieuwe rand- en beginvoorwaarden de simulatie laten lopen merken we iets opmerkelijks op.
-De autodichtheid komt soms onder $0$.
+Dit geeft de nieuwe randvoorwaarden en dus kan de nieuwe simulatie gedaan worden.
+Als we voor onze nieuwe rand- en beginvoorwaarden de simulatie laten lopen merken we echter iets opmerkelijks op.
+Vanaf een bepaald tijdstip is er sprake van negatieve autodichtheid (zie onderstaand figuur).
 \begin{figure}[H]
 \begin{subfigure}{0.45\textwidth}
 \includegraphics[scale=0.5]{6gek.eps}
@@ -369,7 +369,7 @@ De autodichtheid komt soms onder $0$.
 \end{subfigure}
 \end{figure}
 
-Om dit te voorkomen, maken we gebruik van het opgewonden schema.
+Om dit te voorkomen, maken we gebruik van het upwind schema.
 Dit maakt gebruikt van de benadering:
 \begin{align*}
 \dot{u}_{i} =\frac{-u_{i-1}+u_{i}}{\Delta x}
@@ -416,6 +416,14 @@ Door deze nieuwe functies in ons programma te implementeren krijgen we een nieuw
 \includegraphics[scale=0.8]{6goed.eps}
 \caption{Simulatie met opgewonden schema}
 \end{figure}
+We zijn ge\"intereseerd in de benodigde tijd voordat de file volledig is verdwenen.
+We zeggen dat een file voorbij is als de weg volledig leeg is (geen auto's meer op de weg). 
+Formeel gezegd zeggen we dat de file voorbij is  op tijdstip \(t\)als:
+\begin{align*}
+	\int_{0}^L\rho(x,t)dx<0.001
+\end{align*}
+Met behulp van de trapeziumregel, kunnen we eenvoudig uitrekenen wanneer de weg dus leeg is.
+
 
 \end{document}
 %plaatje opgave 5 is op t=0.3600
