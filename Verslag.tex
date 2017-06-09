@@ -168,7 +168,7 @@ u_2^2\\
 &&
 \vec{r}(\vec{u}) = 
 \begin{pmatrix}
-\frac{-\nu}{\Delta x^2} + \frac{1}{4\Delta x^2}\\
+\frac{-\nu}{\Delta x^2} + \frac{1}{4\Delta x}\\
 0\\
 \vdots\\
 0\\
@@ -275,10 +275,11 @@ We hebben nu: $u(0,t) = 1$, dus krijgen we:
 \begin{align*}
 -\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{-u_{0}+2u_1-u_{2}}{\Delta x^2}
 = \frac{-1+2u_1-u_{2}}{\Delta x^2}
-= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{-1}{\Delta x^2}\\
+= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{-1}{\Delta x^2}
 \end{align*}
 
-Voor het opgewonden schema hebben we:\begin{align*}
+Voor het opgewonden schema hebben we:
+\begin{align*}
 \dot{u}_{i} =\frac{-u_{i-1}+u_{i}}{\Delta x}
 \end{align*}
 Dus hebben we voor $2\leq i \leq N+1$:
