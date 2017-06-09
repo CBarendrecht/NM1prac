@@ -212,7 +212,6 @@ u_2^2\\
 \end{pmatrix}
 \end{align*}
 
-\textbf{Opgave 3}
 Vervolgens gaan we m.b.v. onze benadering 
 \begin{align*}
 \dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
@@ -247,8 +246,12 @@ Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een a
 
 Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar dat de aanvoer gelijk blijft: op het begin van de weg blijft de dichtheid groot.
 Op deze manier groeit het totaal aantal auto's op de weg met de tijd.
+Helaas is het programma vrij traag, omdat $\Dt$ gelijk is aan $0.0001$.
+
 \newpage
-\textbf{Opgave 4}
+\section*{$\Dt$ optimaliseren}
+Om het programma sneller te laten lopen, willen we $\Dt
+$ zo groot mogelijk kiezen, maar zonder dat de integratiemethode instabiel wordt.
 Om te kijken hoe groot we $\Dt$ kunnen kiezen, schrijven we voor alle $i$:
 \begin{align*}
 \dot{u}_i =g_i(\vec{u})
@@ -304,7 +307,16 @@ Met de gekozen waarden uit opgave $3$ vinden we een maximale tijdstap van:
 \Delta t \leq \frac{3^2}{2\cdot 0.5 \cdot(100 +1)^2} = \frac{9}{10201}
 \end{align*}
 
-\textbf{Opgave 6}
+Om te laten zien dat dit echt de maximale waarde voor $\Dt$ is zodat de integratie stabiel is, vergelijken we de simulatie voor $\Dt = \frac{9}{10201}$ met de simulatie voor $\Dt = \frac{909}{1020100}$: een $1\%$ grotere tijdstap.
+We zien dat voor een net iets grotere tijdstap de integratiemethode inderdaad instabiel is en dus onnauwkeurig is.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{5.eps}
+\caption{Vergelijking tussen de maximale waarde van $\Dt$ en een $1\%$ grotere tijdstap}
+\end{figure}
+
+\section*{Andere voorwaarden}
 Laat nu: 
 \begin{align*}
 	u(x,0) =\begin{cases}
