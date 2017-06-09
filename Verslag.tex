@@ -246,9 +246,8 @@ Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een a
 \end{figure}
 
 Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar dat de aanvoer gelijk blijft: op het begin van de weg blijft de dichtheid groot.
-
-
-
+Op deze manier groeit het totaal aantal auto's op de weg met de tijd.
+\newpage
 \textbf{Opgave 4}
 Om te kijken hoe groot we $\Dt$ kunnen kiezen, schrijven we voor alle $i$:
 \begin{align*}
@@ -337,11 +336,26 @@ We hebben nu: $u(0,t) = 1$, dus krijgen we:
 = \frac{-2u_1+u_{2}}{\Delta x^2} +\frac{1}{\Delta x^2}
 \end{align*}
 
-Voor het opgewonden schema hebben we:
+Als we voor onze nieuwe rand- en beginvoorwaarden de simulatie laten lopen merken we iets opmerkelijks op.
+De autodichtheid komt soms onder $0$.
+\begin{figure}[H]
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[scale=0.5]{6gek.eps}
+\caption{Momentopname dichtheid}
+\end{subfigure}
+~
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[scale=0.5]{6gekc.eps}
+\caption{Close-up momentopname van dichtheid onder nul}
+\end{subfigure}
+\end{figure}
+
+Om dit te voorkomen, maken we gebruik van het opgewonden schema.
+Dit maakt gebruikt van de benadering:
 \begin{align*}
 \dot{u}_{i} =\frac{-u_{i-1}+u_{i}}{\Delta x}
 \end{align*}
-Dus hebben we voor $2\leq i \leq N+1$:
+Dus dan hebben we voor $2\leq i \leq N+1$:
 \begin{align*}
 \left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_i) &= \frac{-\frac{1}{2}u_{i-1}^2+\frac{1}{2}u_{i}^2}{2\Delta x}
 = \frac{-u_{i-1}^2+u_{i}^2}{4\Delta x}
@@ -375,6 +389,14 @@ u_1^2\\
 \frac{\nu u_N}{\Delta x^2}\\
 \end{pmatrix}
 \end{align*}
+
+Door deze nieuwe functies in ons programma te implementeren krijgen we een nieuwe grafiek die gelukkig niet onder nul komt:
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{6goed.eps}
+\caption{Simulatie met opgewonden schema}
+\end{figure}
 
 \end{document}
 %plaatje opgave 5 is op t=0.3600
