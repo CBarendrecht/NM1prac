@@ -61,7 +61,8 @@
 
 \begin{document}
 \maketitle
-
+\newpage
+\section*{Inleiding}
 Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). 
 We vatten de autodichtheid \(\rho(x,t)\) op als een functie van plaats en tijd, hierbij geeft \(x\in[0,L]\) de plaats op de snelweg weer en \(t\in[0,t_e]\) het tijdstip van meten weer, met \(t_e\) het laatste tijdstip waarop wordt gemeten. 
 Dit is schematisch weergegeven in onderstaand figuur.
@@ -247,12 +248,12 @@ Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een a
 \vspace{-10pt}
 Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar dat de aanvoer gelijk blijft: op het begin van de weg blijft de dichtheid groot.
 Op deze manier groeit het totaal aantal auto's op de weg met de tijd.
-Helaas is het programma vrij traag, omdat $\Dt$ gelijk is aan $0.0001$.
+Helaas is het programma vrij traag, omdat $\Dt$ gelijk is aan $0.0001$ Hierdoor worden er in totaal \(\frac{t_e}{\Dt}=5\cdot10^4\) tijdstappen en dus \(1\cdot10^5\) functie evaluaties en \(5\cdot10^4\) matrix evaluaties nodig.
 
 \newpage
 \section*{$\Dt$ optimaliseren}
 Om het programma sneller te laten lopen, willen we $\Dt
-$ zo groot mogelijk kiezen, maar zonder dat de integratiemethode instabiel wordt.
+$ zo groot mogelijk kiezen, zonder dat de integratiemethode instabiel wordt.
 Om te kijken hoe groot we $\Dt$ kunnen kiezen, schrijven we voor alle $i$:
 \begin{align*}
 \dot{u}_i =g_i(\vec{u})
@@ -319,9 +320,9 @@ Als we de simulatie lang laten doorlopen blaast de simulatie met de te grote $\D
 \caption{Vergelijking tussen de maximale stabiele waarde voor $\Dt$ en een $1\%$ grotere tijdstap bij $t=0.360$}
 \end{figure}
 
-\section*{Andere begin- en randvoorwaarden}
+\section*{Verplaatsing van een file}
 Het eerste probleem, simuleerde het begin van een file (Een hele hoge dichtheid in het begin die zich langzaam steeds verder verspreid over de weg). 
-Een volgende stap is om het einde van een file te simuleren. 
+Een volgende stap is om de verplaatsing van een file te simuleren. 
 Dit is eenvoudig te implementeren door de begin- en randvoorwaarden te veranderen.
 Laat namelijk:
 \begin{align*}
@@ -335,7 +336,7 @@ samen met de nieuwe randvoorwaarden
 \begin{align*}
 u(0,t)=1,&&\frac{\partial u}{\partial x}(L,t)=0,&&\mbox{voor }t\geq 0
 \end{align*}
-Dit geeft een lineaire dichtheid op de snelweg weer (aan het begin van de file kunnen de autos weer rijden, echter autos in de staart van de file staan nog steeds stil).
+Dit geeft een lineaire dichtheid op de snelweg weer (aan het begin van de file rijden de autos langzaam, autos in de staart van de file kunnen echter nog even doorrijden).
 We veranderen ook enkele parameters:
 \begin{table}[H]
 \centering
@@ -418,7 +419,7 @@ Door deze nieuwe functies in ons programma te implementeren krijgen we een nieuw
 \end{figure}
 We zijn ge\"intereseerd in de benodigde tijd voordat de file volledig is verdwenen.
 We zeggen dat een file voorbij is als de weg volledig leeg is (geen auto's meer op de weg). 
-Formeel gezegd zeggen we dat de file voorbij is  op tijdstip \(t\)als:
+Formeel gezegd zeggen we dat de file voorbij is op tijdstip \(t\) als:
 \begin{align*}
 	\int_{0}^L\rho(x,t)dx<0.001
 \end{align*}
@@ -426,11 +427,11 @@ Met behulp van de trapeziumregel (zie \ref{eq:trap}), kunnen we eenvoudig uitrek
 \begin{align}
 	\int_{0}^L\rho(x,t)dx\approx\frac{L}{N+1}\left(\frac{\rho(x_1,t)+\rho(x_{N+1},t)}{2}+\sum_{k=2}^N\rho(x_k,t)\right)\label{eq:trap}
 \end{align}
-Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tijd.
+Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tijd. We concluderen dat de weg leeg is op \(t=3.186\).
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{autos.eps}
-  \caption{Een schematische weergave van een eendimensionaal file probleem}
+  \caption{Het aantal autos op de weg als functie van de tijd}
   \label{fig:autos}
 \end{figure}
 
