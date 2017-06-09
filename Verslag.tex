@@ -127,6 +127,7 @@ We vinden dat vergelijking \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\
 Het probleem in deze vorm heet Burger's vergelijking in conservatieve vorm. \\
 Wiskundig kan dit probleem geformuleerd worden als het volgende stelsel differentiaal vergelijkingen:
 \begin{align}
+\label{eq:dif}
 \frac{\partial u}{\partial t} &= \nu \frac{\partial^2 u}{\partial x^2} -\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) &\text{ voor } 0<x<L, t>0\\\label{eq:u0}
 u(0,t) &= -1 &\text{ voor } t\geq 0\\
 \frac{\partial u}{\partial x}(L,t) &= 0 &\text{ voor } t\geq 0\\
@@ -140,14 +141,16 @@ en Neumann randvoorwaarden:
 \begin{align*}
 u(0,t) &= -1 &&
 \frac{\partial u}{\partial x}(L,t) = 0 
-\end{align*} 
-\section*{Het probleem discretiseren}
-Om het probleem te kunnen simuleren, discretiseren we het probleem zodanig dat $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
-In het vervolg geldt $u_i=u(x_i)$.
-We schrijven de eerste formule in de vorm voor $\vec{u} = (u_1,\dots,u_{N+1})^\intercal$:
-\begin{align*}
-\dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
 \end{align*}
+Hierbij is \(\nu>0\) de zogeheten viscositeits parameter.
+\section*{Het probleem discretiseren}
+Om het probleem te kunnen simuleren, discretiseren we het probleem naar de plaats, zodanig dat $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
+In het vervolg geldt $u_i=u(x_i)$.
+Laten we $\vec{u} = (u_1,\dots,u_{N+1})^\intercal$, dan kunnen we vergelijking \eqref{eq:dif} als:
+\begin{align}
+\dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
+\end{align}
+Met \(K\) een \(N+1\times N+1\)-matrix, \(\vec{f}(\vec{u})\) een functie die de beginvoorwaarde verwerkt en \(\vec{r}(\vec{u})\) een functie die de randvoorwaarden verwerkt.
 Met behulp van de centrale differentie methode geldt:
 \begin{align*}
 \frac{\partial^2 u}{\partial x^2}(x_i) &= \frac{u_{i-1}-2u_i+u_{i+1}}{\Delta x^2}\\
@@ -164,12 +167,12 @@ Ook hebben we:
 = \frac{-1+u_{2}^2}{4\Delta x}
 = \frac{u_{2}^2}{4\Delta x}+\frac{-1}{4\Delta x}
 \end{align*}
-Voor $u_{N+1}$ kunnen we onze beginvoorwaarde verwerken d.m.v. het virtuele punt $x_{N+2}$.
+Voor $u_{N+1}$ kunnen we onze beginvoorwaarde verwerken door middel van het virtuele punt $x_{N+2}$.
 We krijgen dan:
 \begin{align*}
 0=\dot{u}_{N+1} = \frac{-u_{N}+u_{N+2}}{2\Delta x}
 \end{align*}
-Dus $u_{N+2}=u_N$.
+Er volgt dat $u_{N+2}=u_N$.
 We hebben dan dus:
 \begin{align*}
 \frac{\partial^2 u}{\partial x^2}(x_{N+1}) &= \frac{u_{N}-2u_{N+1}+u_{N+2}}{\Delta x^2}
@@ -178,7 +181,7 @@ We hebben dan dus:
 = \frac{-u_{N}^2}{4\Delta x} +\frac{u_{N}^2}{4\Delta x}
 \end{align*}
 
-Dus we krijgen dan:
+Uiteindelijk vinden we voor \(K,\vec{f}\) en \(\vec{r}\) de volgende functies:
 \begin{align*}
 K = \frac{1}{\Delta x^2}\cdot\begin{pmatrix}
 -2 & 1 & 0 & \hdots & 0 & 0\\
