@@ -60,7 +60,9 @@
 \begin{document}
 \maketitle
 
-Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). We vatten de autodichtheid \(\rho(x,t)\) op als een functie van plaats en tijd, hierbij geeft \(x\in[0,L]\) de plaats op de snelweg weer en \(t\in[0,t_e]\) het tijdstip van meten weer, met\(t_e\) het laatste tijdstip waarop wordt gemeten. Dit is schematisch weergegeven in onderstaand figuur.
+Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). 
+We vatten de autodichtheid \(\rho(x,t)\) op als een functie van plaats en tijd, hierbij geeft \(x\in[0,L]\) de plaats op de snelweg weer en \(t\in[0,t_e]\) het tijdstip van meten weer, met \(t_e\) het laatste tijdstip waarop wordt gemeten. 
+Dit is schematisch weergegeven in onderstaand figuur.
 
 \begin{figure}[H]
   \centering
@@ -69,7 +71,32 @@ Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's 
   \label{fig:bots}
 \end{figure}
 Dit model is een praktische toepassing van een probleem in de numerieke stromingsleer en is vernoemd naar een Nederlandse natuurkundige Jan Burgers.
-Om dit te modelleren, wordt aangenomen dat de autodichtheid op het interval \(x_1,x_2\) enkel kan veranderen door  (MEER UITLEG INLEIDING
+Om dit te modelleren, wordt aangenomen dat de autodichtheid op het interval \(x_1,x_2\) enkel kan veranderen in de tijd door de flow aan het begin van de snelweg (\(f(x_1,t)\)) en de flow van de snelweg af  (\(-f(x_2,t)\)). 
+Er volgt dus:
+\begin{align*}
+\frac{d}{dt}\int_{x_1}^{x_2}\rho(x,t)dx=f(x_1,t)-f(x_2,t)
+\end{align*}
+Als de flow \(f\) differentieerbaar is, volgt nu
+\begin{align*}
+	\frac{d}{dt}\int_{x_1}^{x_2}\rho(x,t)dx = -\int_{x_1}^{x_2}\frac{\partial}{\partial x}f(x,t)dx
+\end{align*}
+en dus
+\begin{align}
+	\int_{x_1}^{x_2}\left(\frac{\partial}{\partial t}\rho(x,t)+\frac{\partial}{\partial x}f(x,t)\right)dx=0
+\end{align}
+Merk op dat deze vergelijking geldt voor alle \(x_1,x_2\in[0,L]\), en dus krijgen we 
+\begin{align*}
+	\frac{\partial}{\partial t}\rho(x,t)+\frac{\partial}{\partial x}f(x,t) \equiv 0
+\end{align*}
+Dit geeft een partiële differentiaal vergelijking. \(f\) representeert de file toevoer en is dus van twee dingen afhankelijk: 
+De snelheid \(v(\rho)\) van het verkeer, afhankelijk van de dichtheid, en de gradiënt van de dichtheid. Schrijven we de flow als functie van de dichtheid, dan krijgen we dus:
+\begin{align}
+	f(\rho)=\rho v(\rho)-\nu \frac{\partial \rho}{\partial x},~\nu \in \mathbb{R}_+
+\end{align}
+Dit geeft een basis om het probleem te modelleren.
+\section*{Het eenvoudige probleem}
+
+
 \textbf{Opgave 1}\\
 
 
