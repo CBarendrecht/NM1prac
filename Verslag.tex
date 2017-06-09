@@ -91,23 +91,24 @@ Merk op dat deze vergelijking geldt voor alle \(x_1,x_2\in[0,L]\), en dus krijge
 \begin{align*}
 	\frac{\partial}{\partial t}\rho(x,t)+\frac{\partial}{\partial x}f(x,t) \equiv 0
 \end{align*}
-Dit geeft een partiële differentiaal vergelijking. \(f\) representeert de file toevoer en is dus van twee dingen afhankelijk: 
+Dit geeft een parti\"ele differentiaal vergelijking en hiermee de basis voor dit model.
+
+\section*{Het eenvoudige probleem}
+\(f\) representeert de file toevoer en is dus van twee dingen afhankelijk: 
 De snelheid \(v(\rho)\) van het verkeer, afhankelijk van de dichtheid, en de gradiënt van de dichtheid. Schrijven we de flow als functie van de dichtheid, dan krijgen we dus:
 \begin{align}
 	f(\rho)=\rho v(\rho)-\nu \frac{\partial \rho}{\partial x},~\nu \in \mathbb{R}_+
 \end{align}
-Dit geeft een basis om het probleem te modelleren.
-\section*{Het eenvoudige probleem}
+De tweede term wordt als volgt verklaard:
+Als een auto van een lagere dichtheid naar een hogere dichtheid rijdt, is het aannemelijk dat deze auto harder rijdt.
 
+We laten eerst de snelheid \(v(\rho)\) gegeven woorden door \(v(\rho)=1-\rho\). Hierbij nemen we dus aan dat de snelheid minimaal is als de dichtheid maximaal is (\(\rho=1\)). Tevens nemen we aan dat de maximale snelheid 1 is (als de weg leeg is).
 
-\textbf{Opgave 1}\\
-
-
-Er geldt:
+Door deze vergelijkingen toe te passen op de gevonden differentiaal vergelijking, krijgen we:
 \begin{align}
 	\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}(\rho(1-\rho))=\nu \frac{\partial^2 \rho}{\partial x^2},~\nu\in \mathbb{R}_+ \label{eq:rho}
 	\end{align}
-Laten we \(u(x,t)=\alpha\rho + \beta\), dan kan vergelijking \eqref{eq:rho} herschreven worden tot
+Laten we \(u(x,t)=\alpha\rho + \beta\), dan kan vergelijking \eqref{eq:rho} herschreven worden tot een sterkere vorm  namelijk:
 	\begin{align}
  \frac{\partial u}{\partial t}+\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) = \nu \frac{\partial^2 u}{\partial x^2},~\nu\in \mathbb{R}_+\label{eq:u}
 \end{align}
@@ -117,25 +118,30 @@ Door de afgeleiden van \(u(x,t)\) in termen van \(p(x,t)\) te schrijven als volg
 \frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)&=\frac{1}{2}\frac{\partial}{\partial x}(\alpha^2\rho^2 +2\alpha\beta\rho+\beta^2)= \frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))\\
 \nu \frac{\partial^2 u}{\partial x^2}&=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
-Kunnen we vergelijking \eqref{eq:u} herschrijven tot:
+kunnen we vergelijking \eqref{eq:u} herschrijven tot:
 \begin{align*}
 	\alpha\frac{\partial \rho}{\partial t}+\frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}\\
 		\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}\rho(\beta-(-\frac{\alpha}{2})\rho)=\nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
-We vinden dat vergelijking   \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)\).\\
-Een probleem in deze vorm heet  een conservatieve vorm. \\
-
-Om dit stelsel te integreren, worden eerst de beginvoorwaarden vastgelegd. We beginnen met het simpelste model, (BLABLABLA toevoegen)
-
-
-\textbf{Opgave 2:}
-We hebben:
+We vinden dat vergelijking \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)\).\\
+Het probleem in deze vorm heet Burger's vergelijking in conservatieve vorm. \\
+Wiskundig kan dit probleem geformuleerd worden als het volgende stelsel differentiaal vergelijkingen:
 \begin{align}
 \frac{\partial u}{\partial t} &= \nu \frac{\partial^2 u}{\partial x^2} -\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) &\text{ voor } 0<x<L, t>0\\\label{eq:u0}
 u(0,t) &= -1 &\text{ voor } t\geq 0\\
 \frac{\partial u}{\partial x}(L,t) &= 0 &\text{ voor } t\geq 0\\
 u(x,0) &= 0 &\text{ voor } 0<x<L
 \end{align}
+Met de gegeven Dirichlet beginvoorwaarde:
+\begin{align*}
+  u(x,0) &= 0 &0<x<L
+\end{align*} 
+en Neumann randvoorwaarden:
+\begin{align*}
+u(0,t) &= -1 &&
+\frac{\partial u}{\partial x}(L,t) = 0 
+\end{align*} 
+\section*{Het probleem discretiseren}
 Om het probleem te kunnen simuleren, discretiseren we het probleem zodanig dat $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
 In het vervolg geldt $u_i=u(x_i)$.
 We schrijven de eerste formule in de vorm voor $\vec{u} = (u_1,\dots,u_{N+1})^\intercal$:
