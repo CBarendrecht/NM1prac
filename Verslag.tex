@@ -12,6 +12,8 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{subcaption}
 
 %\newcommand{\f}{\(f\)}
 %\newcommand{\g}{\(g\)}
@@ -68,6 +70,7 @@ Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's 
   \caption{Een schematische weergave van een eendimensionaal file probleem}
   \label{fig:bots}
 \end{figure}
+
 Dit model is een praktische toepassing van een probleem in de numerieke stromingsleer en is vernoemd naar een Nederlandse natuurkundige Jan Burgers.
 Om dit te modelleren, wordt aangenomen dat de autodichtheid op het interval \(x_1,x_2\) enkel kan veranderen door  (MEER UITLEG INLEIDING
 \textbf{Opgave 1}\\
@@ -177,8 +180,12 @@ u_2^2\\
 \end{align*}
 
 \textbf{Opgave 3}
-Mooie tabel is mooi:
-
+Vervolgens gaan we m.b.v. onze benadering 
+\begin{align*}
+\dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
+\end{align*}
+het probleem simuleren met de begin- en randvoorwaarden zoals boven gegeven.
+Hiervoor gebruiken we verder de volgende waarden:
 \begin{table}[H]
 \centering
 \label{tab:specs}
@@ -189,6 +196,25 @@ Mooie tabel is mooi:
 \end{tabular}
 \caption{Startvoorwaarden}
 \end{table}
+\newpage
+Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een aantal momentopnames genomen:
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.7\textwidth}
+  \includegraphics[width=\textwidth]{ss31.eps}
+  \end{subfigure}
+  ~
+  \begin{subfigure}{0.7\textwidth}
+  \includegraphics[width=\textwidth]{ss33.eps}
+  \end{subfigure}
+  \caption{Verspreiding auto's over de weg}
+  \label{fig:scrshots}
+\end{figure}
+
+Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar dat de aanvoer gelijk blijft: op het begin van de weg blijft de dichtheid groot.
+
+
 
 \textbf{Opgave 4}
 Om te kijken hoe groot we $\Dt$ kunnen kiezen, schrijven we voor alle $i$:
@@ -273,9 +299,9 @@ en de nieuwe parameters:
 
 We hebben nu: $u(0,t) = 1$, dus krijgen we:
 \begin{align*}
--\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{-u_{0}+2u_1-u_{2}}{\Delta x^2}
-= \frac{-1+2u_1-u_{2}}{\Delta x^2}
-= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{-1}{\Delta x^2}
+\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{u_{0}-2u_1+u_{2}}{\Delta x^2}
+= \frac{1-2u_1+u_{2}}{\Delta x^2}
+= \frac{-2u_1+u_{2}}{\Delta x^2} +\frac{1}{\Delta x^2}
 \end{align*}
 
 Voor het opgewonden schema hebben we:
