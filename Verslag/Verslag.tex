@@ -365,7 +365,7 @@ Vanaf een bepaald tijdstip is er sprake van negatieve autodichtheid (zie onderst
 ~
 \begin{subfigure}{0.45\textwidth}
 \includegraphics[scale=0.5]{6gekc.eps}
-\caption{Close-up momentopname van dichtheid onder nul}
+\caption{Close-up momentopname van negatieve dichtheid}
 \end{subfigure}
 \end{figure}
 
@@ -422,8 +422,17 @@ Formeel gezegd zeggen we dat de file voorbij is  op tijdstip \(t\)als:
 \begin{align*}
 	\int_{0}^L\rho(x,t)dx<0.001
 \end{align*}
-Met behulp van de trapeziumregel, kunnen we eenvoudig uitrekenen wanneer de weg dus leeg is.
-
+Met behulp van de trapeziumregel (zie \ref{eq:trap}), kunnen we eenvoudig uitrekenen wanneer de weg leeg is.
+\begin{align}
+	\int_{0}^L\rho(x,t)dx\approx\frac{L}{N+1}\left(\frac{\rho(x_1,t)+\rho(x_{N+1},t)}{2}+\sum_{k=2}^N\rho(x_k,t)\right)\label{eq:trap}
+\end{align}
+Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tijd.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{autos.eps}
+  \caption{Een schematische weergave van een eendimensionaal file probleem}
+  \label{fig:autos}
+\end{figure}
 
 \end{document}
 %plaatje opgave 5 is op t=0.3600
