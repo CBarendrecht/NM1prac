@@ -68,9 +68,9 @@ Dit is schematisch weergegeven in onderstaand figuur.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{seagull}
+  \includegraphics[width=0.5\textwidth]{flow}
   \caption{Een schematische weergave van een eendimensionaal file probleem}
-  \label{fig:bots}
+  \label{fig:file}
 \end{figure}
 
 Dit model is een praktische toepassing van een probleem in de numerieke stromingsleer en is vernoemd naar een Nederlandse natuurkundige Jan Burgers.
@@ -238,15 +238,17 @@ Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een a
   \centering
   \begin{subfigure}{0.7\textwidth}
   \includegraphics[width=\textwidth]{ss31.eps}
+  \caption{Eerst is de dichtheid dit}
   \end{subfigure}
   ~
   \begin{subfigure}{0.7\textwidth}
   \includegraphics[width=\textwidth]{ss33.eps}
+  \caption{Later is dit de dichtheid}
   \end{subfigure}
   \caption{Verspreiding auto's over de weg}
   \label{fig:scrshots}
 \end{figure}
-
+\vspace{-10pt}
 Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar dat de aanvoer gelijk blijft: op het begin van de weg blijft de dichtheid groot.
 Op deze manier groeit het totaal aantal auto's op de weg met de tijd.
 Helaas is het programma vrij traag, omdat $\Dt$ gelijk is aan $0.0001$.
@@ -312,11 +314,13 @@ Met de gekozen waarden uit opgave $3$ vinden we een maximale tijdstap van:
 
 Om te laten zien dat dit echt de maximale waarde voor $\Dt$ is zodat de integratie stabiel is, vergelijken we de simulatie voor $\Dt = \frac{9}{10201}$ met de simulatie voor $\Dt = \frac{909}{1020100}$: een $1\%$ grotere tijdstap.
 We zien dat voor een net iets grotere tijdstap de integratiemethode inderdaad instabiel is en dus onnauwkeurig is.
+Als we de simulatie lang laten doorlopen blaast de simulatie met de te grote $\Dt$ zelfs op.
+\vspace{-10pt}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{5.eps}
-\caption{Vergelijking tussen de maximale waarde van $\Dt$ en een $1\%$ grotere tijdstap}
+\includegraphics[scale=0.75]{5.eps}
+\caption{Vergelijking tussen de maximale stabiele waarde voor $\Dt$ en een $1\%$ grotere tijdstap bij $t=0.360$}
 \end{figure}
 
 \section*{Andere voorwaarden}
