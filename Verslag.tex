@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[a4paper]{geometry}
 \usepackage{parskip}
+\usepackage{mathtools}
 \usepackage{amsmath, amssymb}
 \usepackage{color}
 \usepackage{graphicx}
@@ -22,6 +23,8 @@
 \newcommand{\QED}{\hfill\ensuremath{\square}}
 \newcommand{\rk}{\text{rk}~}
 \newcommand{\Dt}{\Delta t}
+\newcommand{\myeq}[2]{\stackrel{\mathclap{\mbox{\normalfont\tiny\sffamily#1}}}{#2}}
+
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -57,8 +60,16 @@
 \begin{document}
 \maketitle
 
-In dit verslag, 
+Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). We vatten de autodichtheid \(\rho(x,t)\) op als een functie van plaats en tijd, hierbij geeft \(x\in[0,L]\) de plaats op de snelweg weer en \(t\in[0,t_e]\) het tijdstip van meten weer, met\(t_e\) het laatste tijdstip waarop wordt gemeten. Dit is schematisch weergegeven in onderstaand figuur.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{seagull}
+  \caption{Een schematische weergave van een eendimensionaal file probleem}
+  \label{fig:bots}
+\end{figure}
+Dit model is een praktische toepassing van een probleem in de numerieke stromingsleer en is vernoemd naar een Nederlandse natuurkundige Jan Burgers.
+Om dit te modelleren, wordt aangenomen dat de autodichtheid op het interval \(x_1,x_2\) enkel kan veranderen door  (MEER UITLEG INLEIDING
 \textbf{Opgave 1}\\
 
 
@@ -66,49 +77,53 @@ Er geldt:
 \begin{align}
 	\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}(\rho(1-\rho))=\nu \frac{\partial^2 \rho}{\partial x^2},~\nu\in \mathbb{R}_+ \label{eq:rho}
 	\end{align}
-Laten we \(u(x,t)=\alpha\rho + \beta\), dan kan vergelijking \eqref{eq:rho} herschreven worden tot:
+Laten we \(u(x,t)=\alpha\rho + \beta\), dan kan vergelijking \eqref{eq:rho} herschreven worden tot
 	\begin{align}
  \frac{\partial u}{\partial t}+\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) = \nu \frac{\partial^2 u}{\partial x^2},~\nu\in \mathbb{R}_+\label{eq:u}
 \end{align}
-We schrijven de afgeleides van \(u(x,t)\) in termen van \(p(x,t\) als volgt:
+Door de afgeleiden van \(u(x,t)\) in termen van \(p(x,t)\) te schrijven als volgt,
 \begin{align*}
  \frac{\partial u}{\partial t} &=\alpha\frac{\partial \rho}{\partial t}\\
 \frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)&=\frac{1}{2}\frac{\partial}{\partial x}(\alpha^2\rho^2 +2\alpha\beta\rho+\beta^2)= \frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))\\
 \nu \frac{\partial^2 u}{\partial x^2}&=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
-En dus:
+Kunnen we vergelijking \eqref{eq:u} herschrijven tot:
 \begin{align*}
 	\alpha\frac{\partial \rho}{\partial t}+\frac{\alpha}{2}\frac{\partial}{\partial x}\rho(\alpha\rho+2\beta))=\alpha \nu\frac{\partial^2 \rho}{\partial x^2}\\
 		\frac{\partial \rho}{\partial t}+\frac{\partial}{\partial x}\rho(\beta-(-\frac{\alpha}{2})\rho)=\nu\frac{\partial^2 \rho}{\partial x^2}
 \end{align*}
-We vinden dus dat vergelijking   \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)+\).\\
+We vinden dat vergelijking   \eqref{eq:u} equivalent is aan \eqref{eq:rho} als \(\beta=1\) en \(\alpha=-2\). We vinden dat \(u(x,t)=1-2\rho(x,t)\).\\
+Een probleem in deze vorm heet  een conservatieve vorm. \\
+
+Om dit stelsel te integreren, worden eerst de beginvoorwaarden vastgelegd. We beginnen met het simpelste model, (BLABLABLA toevoegen)
 
 
 \textbf{Opgave 2:}
 We hebben:
-\begin{align*}
-\frac{\partial u}{\partial t} &= \nu \frac{\partial^2 u}{\partial x^2} -\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) &\text{ voor } 0<x<L, t>0\\
+\begin{align}
+\frac{\partial u}{\partial t} &= \nu \frac{\partial^2 u}{\partial x^2} -\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right) &\text{ voor } 0<x<L, t>0\\\label{eq:u0}
 u(0,t) &= -1 &\text{ voor } t\geq 0\\
 \frac{\partial u}{\partial x}(L,t) &= 0 &\text{ voor } t\geq 0\\
 u(x,0) &= 0 &\text{ voor } 0<x<L
-\end{align*}
-En we doen de discretisatie z.d.d. $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
+\end{align}
+Om het probleem te kunnen simuleren, discretiseren we het probleem zodanig dat $x_0 = 0$, $x_i= i \Delta x$ en $x_{N+1}=L$, dus $\Delta x = \frac{L}{N+1}$.
 In het vervolg geldt $u_i=u(x_i)$.
 We schrijven de eerste formule in de vorm voor $\vec{u} = (u_1,\dots,u_{N+1})^\intercal$:
 \begin{align*}
 \dot{\vec{u}} = \nu K \vec{u} - \vec{f}(\vec{u})+\vec{r}(\vec{u})
 \end{align*}
-Voor $2\leq i\leq N$ geldt:
+Met behulp van de centrale differentie methode geldt:
 \begin{align*}
--\frac{\partial^2 u}{\partial x^2}(x_i) &= \frac{-u_{i-1}+2u_i-u_{i+1}}{\Delta x^2}\\
+\frac{\partial^2 u}{\partial x^2}(x_i) &= \frac{u_{i-1}-2u_i+u_{i+1}}{\Delta x^2}\\
 \left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_i) &= \frac{-\frac{1}{2}u_{i-1}^2+\frac{1}{2}u_{i+1}^2}{2\Delta x}
 = \frac{-u_{i-1}^2+u_{i+1}^2}{4\Delta x}
 \end{align*}
+voor $2\leq i\leq N$.
 Ook hebben we:
 \begin{align*}
--\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{-u_{0}+2u_1-u_{2}}{\Delta x^2}
-= \frac{1+2u_1-u_{2}}{\Delta x^2}
-= \frac{2u_1-u_{2}}{\Delta x^2} +\frac{1}{\Delta x^2}\\
+\frac{\partial^2 u}{\partial x^2}(x_1) &= \frac{u_{0}-2u_1+u_{2}}{\Delta x^2}
+\myeq{\eqref{eq:u0}}{=} \frac{-1-2u_1+u_{2}}{\Delta x^2}
+= \frac{u_{2}-2u_1}{\Delta x^2} -\frac{1}{\Delta x^2}\\
 \left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_1) &= \frac{-u_{0}^2+u_{2}^2}{4\Delta x}
 = \frac{-1+u_{2}^2}{4\Delta x}
 = \frac{u_{2}^2}{4\Delta x}+\frac{-1}{4\Delta x}
@@ -121,26 +136,26 @@ We krijgen dan:
 Dus $u_{N+2}=u_N$.
 We hebben dan dus:
 \begin{align*}
--\frac{\partial^2 u}{\partial x^2}(x_{N+1}) &= \frac{-u_{N}+2u_{N+1}-u_{N+2}}{\Delta x^2}
-= \frac{-u_{N}+2u_{N+1}}{\Delta x^2} +\frac{-u_{N}}{\Delta x^2}\\
+\frac{\partial^2 u}{\partial x^2}(x_{N+1}) &= \frac{u_{N}-2u_{N+1}+u_{N+2}}{\Delta x^2}
+= \frac{u_{N}-2u_{N+1}}{\Delta x^2} +\frac{u_{N}}{\Delta x^2}\\
 \left(\frac{\partial}{\partial x}\left(\frac{1}{2}u^2\right)\right)(x_{N+1}) &= \frac{-u_{N}^2+u_{N+2}^2}{4\Delta x}
 = \frac{-u_{N}^2}{4\Delta x} +\frac{u_{N}^2}{4\Delta x}
 \end{align*}
 
 Dus we krijgen dan:
 \begin{align*}
-K = -\begin{pmatrix}
-2 & -1 & 0 & \hdots & 0 & 0\\
--1 & 2 & -1 & \hdots & 0 & 0\\
-0 & -1 & 2 & \hdots & 0 & 0\\
+K = \frac{1}{\Delta x^2}\cdot\begin{pmatrix}
+-2 & 1 & 0 & \hdots & 0 & 0\\
+1 & -2 & 1 & \hdots & 0 & 0\\
+0 & 1 & -2 & \hdots & 0 & 0\\
 \vdots & \vdots & \vdots & \ddots & \vdots\\
-0 & 0 & 0 & \hdots & 2 & -1\\
-0 & 0 & 0 & \hdots & -1 & 2\\
-\end{pmatrix}\cdot\frac{1}{\Delta x^2}
+0 & 0 & 0 & \hdots & -2 & 1\\
+0 & 0 & 0 & \hdots & 1 & -2\\
+\end{pmatrix}
 \end{align*}
 en
 \begin{align*}
-\vec{f}(\vec{u}) = 
+\vec{f}(\vec{u}) = \frac{1}{4\Delta x}\cdot
 \begin{pmatrix}
 u_2^2\\
 -u_1^2 + u_3^2\\
@@ -150,7 +165,6 @@ u_2^2\\
 -u_{N-1}^2+u_{N+1}^2\\
 -u_N^2\\
 \end{pmatrix}
-\cdot\frac{1}{4\Delta x}
 &&
 \vec{r}(\vec{u}) = 
 \begin{pmatrix}
