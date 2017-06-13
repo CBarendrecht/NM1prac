@@ -250,7 +250,6 @@ Hier zien we dat de auto's zich langzaamaan over de weg gaan verspreiden, maar d
 Op deze manier groeit het totaal aantal auto's op de weg met de tijd.
 Helaas is het programma vrij traag, omdat $\Dt$ gelijk is aan $0.0001$ Hierdoor worden er in totaal \(\frac{t_e}{\Dt}=5\cdot10^4\) tijdstappen en dus \(1\cdot10^5\) functie evaluaties en \(5\cdot10^4\) matrix evaluaties nodig.
 
-\newpage
 \section*{$\Dt$ optimaliseren}
 Om het programma sneller te laten lopen, willen we $\Dt
 $ zo groot mogelijk kiezen, zonder dat de integratiemethode instabiel wordt.
@@ -427,13 +426,13 @@ Met behulp van de trapeziumregel (zie \ref{eq:trap}), kunnen we eenvoudig uitrek
 \begin{align}
 	\int_{0}^L\rho(x,t)dx\approx\frac{L}{N+1}\left(\frac{\rho(x_1,t)+\rho(x_{N+1},t)}{2}+\sum_{k=2}^N\rho(x_k,t)\right)\label{eq:trap}
 \end{align}
-Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tijd. We concluderen dat de weg leeg is op \(t=3.186\).
+Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tijd.  
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{autos.eps}
   \caption{Het aantal autos op de weg als functie van de tijd}
   \label{fig:autos}
 \end{figure}
-
+We concluderen dat de weg leeg is op \(t=3.186\).
 \end{document}
 %plaatje opgave 5 is op t=0.3600
