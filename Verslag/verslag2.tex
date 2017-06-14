@@ -64,7 +64,23 @@
 \maketitle
 \newpage
 \section*{Inleiding}
-Files zijn een alledaags probleem. In dit modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). 
+Files zijn een groot probleem. 
+Elke dag weer staan er vele auto's weer in een lange rij op elkaar te wachten.
+Dit kost natuurlijk allemaal heel veel tijd en tijd is geld, dus het fileprobleem is een grote kostenpost.
+Daarom is het van groot belang dat er een oplossing wordt gezocht voor files.
+
+Alvorens een passende oplossing te vinden moet eerst onderzocht worden hoe files werken.
+Daarvoor proberen we antwoord te vinden op de volgende vragen:
+Hoe ontstaan files?
+Hoe veranderen de files van lengte?
+Wat voor soorten files zijn er en wat zijn de verschillen?
+Hoe lossen files uiteindelijk weer op?
+
+In dit verslag hebben we geprobeerd antwoord te geven op de eerste en de laatste vraag door het fileprobleem na te simuleren.
+Ons hoofddoel hierbij is het vinden van een juiste methode om dit na te bootsen met een numerieke benadering.
+
+\section*{Theorie}
+In dit verslag modelleren we de dichtheid van auto's tijdens een file op een snelweg. We beperken ons tot een eendimensionale snelweg van lengte \(L\) (geen afslagen of meerdere wegen die samenkomen). 
 We vatten de autodichtheid \(\rho(x,t)\) op als een functie van plaats en tijd, hierbij geeft \(x\in[0,L]\) de plaats op de snelweg weer en \(t\in[0,t_e]\) het tijdstip van meten weer, met \(t_e\) het laatste tijdstip waarop wordt gemeten. 
 Dit is schematisch weergegeven in onderstaand figuur.
 
@@ -244,6 +260,7 @@ Om te laten zien hoe de auto's zich over de weg gaan verspreiden hebben we een a
   \caption{Later is dit de dichtheid}
   \end{subfigure}
   \caption{Verspreiding auto's over de weg}
+  \vspace{-10pt}
   \label{fig:scrshots}
 \end{figure}
 \vspace{-10pt}
@@ -437,7 +454,24 @@ Onderstaande figuur geeft het aantal autos op de weg weer als functie van de tij
 \end{figure}
 We concluderen dat de weg leeg is op \(t=3.186\).
 
-\subsection*{De Matlab code}
+\subsection*{Conclusie}
+Om het gedrag van files goed te kunnen begrijpen, hebben we een goede manier bedacht om files na te bootsen.
+Door gebruikt te maken van de discretisatie van een weg en te kijken hoe de autodichtheid $\rho$ verandert met de tijd, krijgen we een beeld hoe files kunnen ontstaan en weer kunnen oplossen.
+Hierbij hebben we centrale differentie gebruikt bij de benadering van de afgeleides.
+
+We zagen eerst dat het makkelijker is om onze differentiaalvergelijkingen toe te passen op $u = 1-2\rho$, omdat deze er dan iets mooier uitzien.
+Bij het onderzoek naar het ontstaan van files vonden we dat de autodichtheid langzaam over de hele weg toeneemt en zich over de weg verspreidt.
+Vervolgens hebben we onderzocht wat de maximale tijdstap is zodat de integratie stabiel is: blijkbaar moet voor stabiliteit gelden:
+\begin{align*}
+\Dt \leq \frac{\Delta x^2}{2\nu} =\frac{L^2}{2\nu(N+1)^2}
+\end{align*}
+
+Voor de nabootsing van het oplossen van files hebben we het upwind schema gebruik: een alternatief voor centrale differentie.
+Dit om te zorgen dat de dichtheid niet negatief werd.
+Hier zagen we dat de auto's langzaamaan de weg verlaten.
+Dit gebeurde lineair met de tijd.
+
+\subsection*{De Matlabcode}
 Hieronder inbegrepen is de code die gebruikt is voor het maken van de grafieken:\\
 De gebruikte code voor het maken van figuur \ref{fig:scrshots}:
 
